@@ -14,3 +14,11 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get("/product/{product_id?}", "ProductController@showAll");
+Route::get('/product/display', 'ProductController@showAll');
+Route::post('/product/save', 'ProductController@saveNew');
+
+// controller Resource 
+Route::resource('categories', 'CategoryController');
+
