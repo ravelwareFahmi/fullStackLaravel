@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Product;
 
 class ProductTableSeeder extends Seeder
 {
@@ -12,5 +13,9 @@ class ProductTableSeeder extends Seeder
     public function run()
     {
         //
+        Product::create([
+            "name" => "Produk A",
+            "description" => "Deskripsi Produk A created by model"
+        ]);
     }
 }
