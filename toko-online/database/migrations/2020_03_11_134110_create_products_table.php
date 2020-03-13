@@ -26,7 +26,7 @@ class CreateProductsTable extends Migration
             //     $table->string("description");
             // }
             // $table->timestamps();
-            $table->string('id', 11)->nullable()->change();
+            // $table->string('product', 11)->nullable()->change();
         });
 
 
