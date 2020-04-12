@@ -19,6 +19,15 @@ Route::get("/product/{product_id?}", "ProductController@showAll");
 Route::get('/product/display', 'ProductController@showAll');
 Route::post('/product/save', 'ProductController@saveNew');
 
-// controller Resource 
+// controller Resource
 Route::resource('categories', 'CategoryController');
 
+
+Route::get('/userAdd', function () {
+    App\User::create([
+        'name'=>'admin',
+        'email'=> uniqid(). '@gmail.com',
+        'password'=> bcrypt('admin')
+    ]);
+    return response()->json(App\User::all());
+});
