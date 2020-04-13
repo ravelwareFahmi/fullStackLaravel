@@ -12,36 +12,50 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    // action untuk menampilkan semua kategori
+
      public function index()
-    {
-        // return Categories::all();
-        return response()->json(Categories::all());
+     {
+        // return 'test';
+        return \App\Categories::all();
+        // return response()->json(Categories::all());
     }
 
     // action yang digunakan untuk menampilkan berdasarkan search
-    public function search()
+    public function search(Request $request)
     {
     //
-
+        $kategori = $request->get('name');
+        return Categories::where('name','like','%'.$kategori.'%')->get();
     }
 
     // action yang digunakan softdelete
-    public function delete()
+    public function delete($id)
     {
-
+        $category = Categories::findOrFail($id);
+        // return $category;
+        if(!$category->trashed()){
+            $category->delete();
+        }
 
     }
 
     // action yang digunakan untuk restore
-    public function restore()
+    public function restore($id)
     {
+        $category = Categories::withTrashed()->findOrFail($id);
+
+        if(!$category->trashed()){
+            return 'Kategori tidak perlu di resore';
+        } else {
+           'return test';
+        }
 
     }
 
     // action yang digunakan untuk delete permanent
     public function permanetDelete()
     {
-
+        $category = Categories::withTrashed()->findOrFail($id);
+        $category->forceDelete();
     }
 }

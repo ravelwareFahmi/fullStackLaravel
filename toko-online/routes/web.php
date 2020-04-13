@@ -31,3 +31,12 @@ Route::get('/userAdd', function () {
     ]);
     return response()->json(App\User::all());
 });
+
+
+Route::group(['prefix' => 'latihan'], function() {
+    Route::get('/kategori/all', 'CategoryController@index');
+    Route::get('/kategori/search', 'CategoryController@search');
+    Route::get('/kategori/delete/{id}', 'CategoryController@delete');
+    Route::get('/kategori/restore/{id}', 'CategoryController@restore');
+
+});
