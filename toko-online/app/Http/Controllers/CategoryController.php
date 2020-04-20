@@ -16,7 +16,9 @@ class CategoryController extends Controller
      public function index()
      {
         // return 'test';
-        return \App\Categories::all();
+        $categori = \App\Categories::paginate(3);
+        // dd($categori);
+        return view('kategori.index', compact('categori'));
         // return response()->json(Categories::all());
     }
 
@@ -45,15 +47,15 @@ class CategoryController extends Controller
         $category = Categories::withTrashed()->findOrFail($id);
 
         if(!$category->trashed()){
-            return 'Kategori tidak perlu di resore';
+            return 'Kategori tidak perlu di restore';
         } else {
-           'return test';
+            return "Kategori $category->name berhasil direstore";
         }
 
     }
 
     // action yang digunakan untuk delete permanent
-    public function permanetDelete()
+    public function permanetDelete($id)
     {
         $category = Categories::withTrashed()->findOrFail($id);
         $category->forceDelete();
